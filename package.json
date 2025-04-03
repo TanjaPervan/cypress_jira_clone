@@ -1,0 +1,23 @@
+{
+  "name": "cypress_jira_clone",
+  "version": "1.0.0",
+  "description": "\"E2E testing for Jira clone app\"",
+  "main": "index.js",
+  "scripts": {
+  "cypress:open": "cypress open",
+  "cypress:run": "cypress run"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TanjaPervan/cypress_jira_clone.git"
+  },
+  "author": "Tanja Pervan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TanjaPervan/cypress_jira_clone/issues"
+  },
+  "homepage": "https://github.com/TanjaPervan/cypress_jira_clone#readme",
+  "devDependencies": {
+    "cypress": "^14.2.1"
+  }
+}
