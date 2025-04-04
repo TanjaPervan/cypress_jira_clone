@@ -1,1 +1,1 @@
-{"total":0,"items":[]}
+{"total":2,"items":[{"uid":"247ee4af402fc0391854d60719d9d74e","name":"Board Page, Basic E2E tests","statistic":{"failed":0,"broken":0,"skipped":0,"passed":8,"unknown":0,"total":8}},{"uid":"3724ca3fc219a8e4f5098dc0c500a19f","name":"Settings project Page, Basic E2E tests","statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1}}]}
