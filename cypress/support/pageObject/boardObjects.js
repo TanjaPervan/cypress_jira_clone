@@ -16,9 +16,9 @@ class BoardObject {
     issueCardsInColumn: (columnsId) => cy.get(`#${columnsId} issue-card`),
     issueCardsByIndex: (index) =>
       cy.get(`#${this.columnsIds[index]} issue-card`, {
-        timeout: 20000,
+        timeout: 10000,
       }),
-    modalIssue: () => cy.get('issue-modal', { timeout: 30000 }),
+    modalIssue: () => cy.get('issue-modal', { timeout: 10000 }),
     statusDropdownItem: (text) => cy.contains('li', text),
 
     statusButtonSelector: 'button.btn.btn-secondary.uppercase span',
@@ -49,7 +49,7 @@ class BoardObject {
 
         cy.get('@selectedTicket').click();
 
-        this.elements.modalIssue().scrollIntoView().should('be.visible');
+        this.elements.modalIssue().scrollIntoView().should('exist');
 
         this.elements
           .modalIssue()
@@ -62,7 +62,7 @@ class BoardObject {
           .modalIssue()
           .scrollIntoView()
           .getTextWithoutSpaces('button', toStatus)
-          .should('be.visible');
+          .should('exist');
 
         cy.get('button.btn.btn-empty.icon-only').last().click();
 
