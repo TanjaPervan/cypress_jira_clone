@@ -60,6 +60,7 @@ class BoardObject {
 
         this.elements
           .modalIssue()
+          .scrollIntoView()
           .getTextWithoutSpaces('button', toStatus)
           .should('be.visible');
 
