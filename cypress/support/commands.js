@@ -12,3 +12,22 @@ Cypress.Commands.add(
     });
   }
 );
+
+
+Cypress.Commands.add('openFirstTicketGetTitile', (columnId) => {
+  return cy
+    .get(`#${columnId} issue-card`)
+    .first()
+    .as('selectedTicket')
+    .invoke('text')
+    .then((text) => {
+      const ticketTitle = text.trim();
+      cy.log(`Ticket title: ${ticketTitle}`);
+      cy.get('@selectedTicket').click();
+
+      return ticketTitle;
+    });
+});
+
+
+

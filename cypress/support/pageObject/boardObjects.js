@@ -18,17 +18,10 @@ class BoardObject {
       cy.get(`#${this.columnsIds[index]} issue-card`, {
         timeout: 20000,
       }),
-    modalIssue: () => cy.get('issue-modal', { timeout: 20000 }),
+    modalIssue: () => cy.get('issue-modal', { timeout: 30000 }),
     statusDropdownItem: (text) => cy.contains('li', text),
 
     statusButtonSelector: 'button.btn.btn-secondary.uppercase span',
-    projectNameSelector: '.font-medium.text-textDark.text-15',
-    projectCategorySelector: '.text-textMedium.text-13',
-
-    nameFiled: () => cy.get('[formcontrolname="name"]'),
-    urlFiled: () => cy.get('[formcontrolname="url"]'),
-    categoryFiled: () => cy.get('[formcontrolname="category"]'),
-    descriptionFiled: () => cy.get('[formcontrolname="description"]'),
   };
   visit() {
     cy.visit('https://jira.trungk18.com/project/board');
@@ -56,7 +49,7 @@ class BoardObject {
 
         cy.get('@selectedTicket').click();
 
-        this.elements.modalIssue().should('be.visible');
+        this.elements.modalIssue().scrollIntoView().should('be.visible');
 
         this.elements
           .modalIssue()

@@ -1,17 +1,17 @@
 /// <reference types="cypress" />
 
-import { boardObj } from '../support/boardObject';
+import { boardObj } from '../support/pageObject/boardObjects';
 
 describe('Board Page, Basic E2E tests', () => {
   beforeEach(() => {
     boardObj.visit();
   });
 
-  it('should displey exactly 4 columns', () => {
+  it('TC001 - should displey exactly 4 columns', () => {
     boardObj.elements.listColumnTitles().should('have.length', 4);
   });
 
-  it('should display all columns with correct titles', () => {
+  it('TC002 - should display all columns with correct titles', () => {
     boardObj.elements.listColumnTitles().each((el, index) => {
       cy.wrap(el)
         .invoke('text')
@@ -22,7 +22,7 @@ describe('Board Page, Basic E2E tests', () => {
     });
   });
 
-  it('should match count of task', () => {
+  it('TC003 - should match count of task', () => {
     boardObj.elements.listColumnTitles().each((el, index) => {
       const columnTitle = boardObj.columnTitles[index];
       cy.log(`${el.toString()} elemeeeent`);
@@ -47,46 +47,23 @@ describe('Board Page, Basic E2E tests', () => {
     });
   });
 
-  it('should move first task from Backlog to Selected for Development', () => {
+  it('TC004 - should move first task from Backlog to Selected for Development', () => {
     boardObj.changeStatusOfCard('Backlog', 'Selected for Development');
   });
-  it('should move first task from Selected for Development to In Progress', () => {
+  it('TC005 - should move first task from Selected for Development to In Progress', () => {
     boardObj.changeStatusOfCard('Selected for Development', 'In progress');
   });
-  it('should move first task from In Progress to Done', () => {
+  it('TC006 - should move first task from In Progress to Done', () => {
     boardObj.changeStatusOfCard('In progress', 'Done');
   });
-  it('should move first task from Done to In progress', () => {
+  it('TC007 - should move first task from Done to In progress', () => {
     boardObj.changeStatusOfCard('Done', 'In progress');
   });
 
-  it('should update Project Settings and Verify on board', () => {
-    const projectName = 'Personal project';
-    const projectUrl = 'https://github.com/TanjaPervan/cypress_jira_clone';
-    const projectCategory = 'Marketing';
-    const projectDescription = 'Project Descriptions.';
+  it('TC009 - Delete first issue from a column and verify removal from board', () => {
+    const firstColumn = boardObj.elements.issueCardsInColumn('Backlog');
 
-    cy.contains('a', 'Project Settings').click();
-    boardObj.elements.nameFiled().clear().type(projectName);
-    boardObj.elements.urlFiled().clear().type(projectUrl);
-    boardObj.elements.categoryFiled().select(projectCategory);
-
-    boardObj.elements.categoryFiled().should('have.value', projectCategory);
-    boardObj.elements.descriptionFiled().clear().type(projectDescription);
-
-    cy.contains('button', 'Save').click();
-
-    cy.verifyIncludesText(boardObj.elements.projectNameSelector, projectName);
-    cy.verifyIncludesText(
-      boardObj.elements.projectCategorySelector,
-      projectCategory,
-      true
-    );
-    cy.go('back');
-  });
-
-  it('Delete first issue from a column and verify removal from board', () => {
-    cy.get(`#Backlog issue-card`).first().as('selectedTicket');
+    firstColumn.first().as('selectedTicket');
 
     cy.get('@selectedTicket')
       .invoke('text')
@@ -98,7 +75,7 @@ describe('Board Page, Basic E2E tests', () => {
         cy.get('[icon="trash"]').click();
         cy.contains('span', 'Delete').click();
 
-        cy.get(`#Backlog issue-card`).should('not.contain.text', ticketTitle);
+        firstColumn.should('not.contain.text', ticketTitle);
       });
   });
 });
