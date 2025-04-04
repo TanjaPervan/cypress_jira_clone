@@ -4,9 +4,14 @@
   "description": "\"E2E testing for Jira clone app\"",
   "main": "index.js",
   "scripts": {
-  "cypress:open": "cypress open",
-  "cypress:run": "cypress run"
-},
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test": "cypress run",
+    "generate:report": "npm run test && allure generate allure-results --clean && cp -r allure-report documents/allure-report",
+    "report": "allure generate allure-results --clean && allure open",
+    "allure:clear": "rm -rf allure-results allure-report",
+    "allure:open": "allure open allure-report"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TanjaPervan/cypress_jira_clone.git"
@@ -18,6 +23,8 @@
   },
   "homepage": "https://github.com/TanjaPervan/cypress_jira_clone#readme",
   "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.41.0",
+    "allure-commandline": "^2.33.0",
     "cypress": "^14.2.1"
   }
 }
