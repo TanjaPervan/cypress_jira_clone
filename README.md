@@ -14,8 +14,11 @@ The test cases are documented and available as a PDF file.
 ## Allure report
 After generating the report, you can view it in browser:
 
+- In GitHub Actions, open the deploy step to access the Allure report link:
+      https://github.com/TanjaPervan/cypress_jira_clone/actions/workflows/pages/pages-build-deployment
+
 - [Open in Browser] [../documents/allure-report/index.html]
-- Go to Actions in GitHub 
+
 
 ## CI/CD - Cypress Tests
 Automated Cypress tests run via GitHub Actions.
