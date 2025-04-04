@@ -44,7 +44,6 @@ node_modules/
 jspm_packages/
 cypress/screenshots/
 cypress/videos/
-allure-results/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
