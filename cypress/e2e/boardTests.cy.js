@@ -82,7 +82,23 @@ describe('Board Page, Basic E2E tests', () => {
       projectCategory,
       true
     );
-
     cy.go('back');
+  });
+
+  it('Delete first issue from a column and verify removal from board', () => {
+    cy.get(`#Backlog issue-card`).first().as('selectedTicket');
+
+    cy.get('@selectedTicket')
+      .invoke('text')
+      .then((text) => {
+        const ticketTitle = text.trim();
+        cy.log(`Ticket title: ${ticketTitle}`);
+        cy.get('@selectedTicket').click();
+
+        cy.get('[icon="trash"]').click();
+        cy.contains('span', 'Delete').click();
+
+        cy.get(`#Backlog issue-card`).should('not.contain.text', ticketTitle);
+      });
   });
 });
