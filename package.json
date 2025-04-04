@@ -6,7 +6,7 @@
   "scripts": {
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "test": "cypress run",
+    "test": "cypress run --env allure=true",
     "generate:report": "npm run test && allure generate allure-results --clean && cp -r allure-report documents/allure-report",
     "report": "allure generate allure-results --clean && allure open",
     "allure:clear": "rm -rf allure-results allure-report",
