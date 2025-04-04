@@ -20,7 +20,15 @@ class BoardObject {
       }),
     modalIssue: () => cy.get('issue-modal', { timeout: 20000 }),
     statusDropdownItem: (text) => cy.contains('li', text),
+
     statusButtonSelector: 'button.btn.btn-secondary.uppercase span',
+    projectNameSelector: '.font-medium.text-textDark.text-15',
+    projectCategorySelector: '.text-textMedium.text-13',
+
+    nameFiled: () => cy.get('[formcontrolname="name"]'),
+    urlFiled: () => cy.get('[formcontrolname="url"]'),
+    categoryFiled: () => cy.get('[formcontrolname="category"]'),
+    descriptionFiled: () => cy.get('[formcontrolname="description"]'),
   };
   visit() {
     cy.visit('https://jira.trungk18.com/project/board');
@@ -50,13 +58,16 @@ class BoardObject {
 
         this.elements.modalIssue().should('be.visible');
 
-        this.elements.modalIssue().getByExactText('button', fromStatus).click();
+        this.elements
+          .modalIssue()
+          .getTextWithoutSpaces('button', fromStatus)
+          .click();
 
         this.elements.statusDropdownItem(toStatus).click();
 
         this.elements
           .modalIssue()
-          .getByExactText('button', toStatus)
+          .getTextWithoutSpaces('button', toStatus)
           .should('be.visible');
 
         cy.get('button.btn.btn-empty.icon-only').last().click();

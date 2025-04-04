@@ -59,4 +59,30 @@ describe('Board Page, Basic E2E tests', () => {
   it('should move first task from Done to In progress', () => {
     boardObj.changeStatusOfCard('Done', 'In progress');
   });
+
+  it('should update Project Settings and Verify on board', () => {
+    const projectName = 'Personal project';
+    const projectUrl = 'https://github.com/TanjaPervan/cypress_jira_clone';
+    const projectCategory = 'Marketing';
+    const projectDescription = 'Project Descriptions.';
+
+    cy.contains('a', 'Project Settings').click();
+    boardObj.elements.nameFiled().clear().type(projectName);
+    boardObj.elements.urlFiled().clear().type(projectUrl);
+    boardObj.elements.categoryFiled().select(projectCategory);
+
+    boardObj.elements.categoryFiled().should('have.value', projectCategory);
+    boardObj.elements.descriptionFiled().clear().type(projectDescription);
+
+    cy.contains('button', 'Save').click();
+
+    cy.verifyIncludesText(boardObj.elements.projectNameSelector, projectName);
+    cy.verifyIncludesText(
+      boardObj.elements.projectCategorySelector,
+      projectCategory,
+      true
+    );
+
+    cy.go('back');
+  });
 });
